@@ -32,12 +32,12 @@ const genRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
 
 const getRandomWord = () => `${lorum[genRandomIndex(lorum)]}`;
 
-const getRandomPost = (words) => {
-  let post = '';
+const getRandomThought = (words) => {
+  let thought = '';
   for (let i = 0; i < words; i++) {
-    post += ` ${getRandomWord()}`;
+    thought += ` ${getRandomWord()}`;
   }
-  return post;
+  return thought;
 };
 const getRandomColor = () =>
   `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -45,6 +45,6 @@ const getRandomColor = () =>
 module.exports = {
   getRandomWord,
   getRandomColor,
-  getRandomPost,
+  getRandomThought,
   genRandomIndex,
 };

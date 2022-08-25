@@ -5,12 +5,17 @@ const userSchema = new Schema(
     userName: {
       type: String,
       required: true,
+      unique: true,
     },
-    color: {
+    email: {
       type: String,
-      default: '#008080',
+      required: true,
+      unique: true,
+      match: [
+        /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+        'Invalid email address format.'
+      ]
     },
-    createdAt: Date,
   },
   {
     toJSON: {

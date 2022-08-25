@@ -23,6 +23,13 @@ const thoughtSchema = new Schema(
       maxLength: 500,
     },
   },
+  thoughts: [
+    {
+    type: Schema.Types.ObjectID,
+    ref: 'thoughts',
+    },
+  ],
+
   {
     toJSON: {
       virtuals: true,
