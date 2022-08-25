@@ -21,10 +21,44 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },  
-  
-  createThought(req, res) { // create a new thought
-    Thought.create(req.body)
-      .then((thought) => res.json(thought))
-      .catch((err) => res.status(500).json(err));
+
+createThought(req, res) { // create a new thought
+  Thought.create(req.body)
+    .then((thought) => res.json(thought))
+    .catch((err) => res.status(500).json(err));
   },
+
+
+updateThought(req, res) {
+  User.{req.body}
+    .then((user) => {
+      
+    })
+
+  }
+    
+deleteThought(req, res) {
+  User.{req.body}
+    .then((user) => {
+      
+    })
+
+  }
+    
+createReaction(req, res) {
+  User.{req.body}
+    .then((user) => {
+      
+    })
+
+  }
+    
+deleteReaction(req, res) {
+  User.{req.body}
+    .then((user) => {
+      
+    })
+
+  }
+
 };
