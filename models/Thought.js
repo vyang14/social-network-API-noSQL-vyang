@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-// Schema to create Post model
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -32,9 +31,9 @@ const thoughtSchema = new Schema(
   }
 );
 
-// Virtual that gets the amount of comments per user
+// Virtual that gets the amount of reactions per user
 thoughtSchema.virtual('reactionCount').get(function () { 
-  return this.reactions.length; 
+  return `reactions: ${this.reactions.length}`; 
 });
 
 const Thought = model('thought', thoughtSchema);

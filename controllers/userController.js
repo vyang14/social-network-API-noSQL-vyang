@@ -2,9 +2,8 @@ const { User, Thought } = require('../models');
 
 module.exports = {
   getUsers(req, res) { // grabs all users
-    User.find({})
-      .select('-__v')
-      .then((user) => res.json(user))
+    User.find()
+      .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
 
@@ -23,7 +22,7 @@ module.exports = {
     User.create(req.body)
       .then((user) => {
         return Thought.findOneAndUpdate(
-          { _id: req.body.postId },
+          { _id: req.body.thoughtId },
           { $addToSet: { users: user._id } },
           { new: true }
         );
@@ -32,7 +31,7 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'User created, but found no post with that ID' })
+              .json({ message: 'User created, but found no thought with that ID' })
           : res.json('User created!')
       )
       .catch((err) => {
