@@ -3,21 +3,22 @@ const { Schema, model } = require('mongoose');
 // Schema to create Post model
 const thoughtSchema = new Schema(
   {
-    published: {
+    thoughtText: {
       type: Boolean,
-      default: false,
+      required: true,
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
+      get: () => Date.now,
     },
-    users: [
-      {
+    username: {
         type: Schema.Types.ObjectId,
         ref: 'user',
       },
-    ],
-    text: {
+    reactions: {
       type: String,
       minLength: 15,
       maxLength: 500,
@@ -31,12 +32,11 @@ const thoughtSchema = new Schema(
   }
 );
 
-// Virtual `userCount` that gets the amount of comments per user
-thoughtSchema.virtual('userCount').get(function () { 
-  return this.users.length; 
+// Virtual that gets the amount of comments per user
+thoughtSchema.virtual('reactionCount').get(function () { 
+  return this.reactions.length; 
 });
 
-// Initialize Post model
 const Thought = model('thought', thoughtSchema);
 
 module.exports = Post;

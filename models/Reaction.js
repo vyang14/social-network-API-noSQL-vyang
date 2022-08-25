@@ -1,33 +1,26 @@
 const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema(
+const reactionSchema = new Schema(
   {
-    id: {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
       type: String,
       required: true,
-      unique: true,
+      minLength: 1,
+      maxLength: 280,
     },
-    reaction: {
+    username: {
       type: String,
       required: true,
-      unique: true,
-      match: [
-        /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
-        'Invalid email address format.'
-      ]
     },
-    user: [
-      {
-      type: String,
-      ref: 'thoughts',
-      },
-    ],
-    friends: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-      },
-    ],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: () => Date.now,
+    },
   },
   {
     toJSON: {

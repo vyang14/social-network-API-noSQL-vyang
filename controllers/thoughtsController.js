@@ -10,7 +10,8 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  getSingleThought(req, res) { // get a single thought by ID
+
+  getThought(req, res) { // get a single thought by ID
     Thought.findOne({ _id: req.params.thoughtId })
       .populate({ path: 'user', select: '-__v' })
       .then((thought) =>
@@ -19,7 +20,7 @@ module.exports = {
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
-  },
+  },  
   
   createThought(req, res) { // create a new thought
     Thought.create(req.body)
