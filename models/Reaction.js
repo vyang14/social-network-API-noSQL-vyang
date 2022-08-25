@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 const reactionSchema = new Schema(
   {
@@ -29,10 +29,4 @@ const reactionSchema = new Schema(
   }
 );
 
-userSchema.virtual('getUserCss').get(function () {
-      return `color: ${this.color}`;
-  });
-
-const User = model('user', userSchema);
-
-module.exports = User;
+module.exports = reactionSchema;
