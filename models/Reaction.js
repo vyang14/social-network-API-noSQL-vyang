@@ -2,12 +2,12 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    username: {
+    id: {
       type: String,
       required: true,
       unique: true,
     },
-    email: {
+    reaction: {
       type: String,
       required: true,
       unique: true,
@@ -16,10 +16,10 @@ const userSchema = new Schema(
         'Invalid email address format.'
       ]
     },
-    thoughts: [
+    user: [
       {
-      type: Schema.Types.ObjectID,
-      ref: 'thought',
+      type: String,
+      ref: 'thoughts',
       },
     ],
     friends: [
@@ -36,8 +36,8 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.virtual('friendCount').get(function () {
-      return `color: ${this.friends.length}`;
+userSchema.virtual('getUserCss').get(function () {
+      return `color: ${this.color}`;
   });
 
 const User = model('user', userSchema);

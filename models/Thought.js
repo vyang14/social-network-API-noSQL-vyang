@@ -23,13 +23,6 @@ const thoughtSchema = new Schema(
       maxLength: 500,
     },
   },
-  thoughts: [
-    {
-    type: Schema.Types.ObjectID,
-    ref: 'thoughts',
-    },
-  ],
-
   {
     toJSON: {
       virtuals: true,
@@ -38,15 +31,12 @@ const thoughtSchema = new Schema(
   }
 );
 
-// Create a virtual property `userCount` that gets the amount of comments per user
-thoughtSchema
-  .virtual('userCount')
-  // Getter
-  .get(function () {
-    return this.users.length;
-  });
+// Virtual `userCount` that gets the amount of comments per user
+thoughtSchema.virtual('userCount').get(function () { 
+  return this.users.length; 
+});
 
-// Initialize our Post model
+// Initialize Post model
 const Thought = model('thought', thoughtSchema);
 
 module.exports = Post;
