@@ -41,7 +41,7 @@ module.exports = {
       });
   },
   
-  updateUser(req, res) {
+  updateUser(req, res) { // create a new user
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $set: req.body },
