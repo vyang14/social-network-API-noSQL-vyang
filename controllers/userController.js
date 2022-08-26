@@ -1,3 +1,4 @@
+const e = require('express');
 const { User, Thought } = require('../models');
 
 module.exports = {
@@ -20,18 +21,9 @@ module.exports = {
 
   createUser(req, res) { // create a new user
     User.create(req.body)
-      .then((user) => {
-        return Thought.findOneAndUpdate(
-          { _id: req.body.thoughtId },
-          { $addToSet: { users: user._id } },
-          { new: true }
-        );
-      })
       .then((user) =>
         !user
-          ? res
-              .status(404)
-              .json({ message: 'User created, but found no thought with that ID' })
+          ? res.status(404).json({ message: 'User created.' })
           : res.json('User created!')
       )
       .catch((err) => {
@@ -67,7 +59,8 @@ module.exports = {
   addFriend(req, res) { 
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.params.friendId} },
+      { $push: { friends: req.params.friendId} },
+      { runValidators: true, new: true },
     )
       .then((user) => 
         !user

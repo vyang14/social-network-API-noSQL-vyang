@@ -34,7 +34,9 @@ None
 
 > None
 
-## Preview
+## Walkthrough Video
+
+![Walkthrough](./Assets/walkthrough.mp4)
 
 ## Question
 
